@@ -14,5 +14,10 @@ namespace WebSocketServer.Controllers
 
             return View();
         }
+
+        public ActionResult Echo()
+        {
+            return View();
+        }
     }
 }
