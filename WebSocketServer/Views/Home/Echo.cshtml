@@ -1,0 +1,90 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "WebSocket Echo Sample";
+}
+
+<div class="row spaced">
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="button" class="btn btn-success" value="Connect" id="connect"/>
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-danger" value="Disconnect" id="disconnect"/><br/>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group scrollable" id="output">
+        <dl class="dl-horizontal"></dl>
+    </div>
+</div>
+
+<div class="row">
+    <form role="form" class="form-inline" id="input">
+        <div class="form-group">
+            <input type="text" id="message" class="form-control " autocomplete="off" size="80" />
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var ws;
+
+        // A function to put timestamps in front of text
+        function timestamp(name) {
+            return (new Date).toTimeString().split(" ")[0] + " " + name;
+        }
+
+        // A function to display messages
+        function addMessage(name, message) {
+            $("#output dl").append(  $("<dt>").text(timestamp(name)),
+                                     $("<dd>").text(message))
+                           .parent()
+                           .animate( { scrollTop: $('#output dl').height() },
+                                     { duration: 500, queue: false});
+        }
+
+        $(function () {
+            $("#disconnect").click(function () { ws.close(); });
+            $("#connect").click(function () {
+                ws = new WebSocket("ws://" + window.location.hostname + ":" + window.location.port + "/api/Echo");
+
+                // These are the core status events for websockets
+                ws.onopen = function () {
+                    addMessage("Server", "connected");
+                };
+                ws.onerror = function (evt) {
+                    addMessage("Error", evt.message);
+                };
+                ws.onclose = function () {
+                    addMessage("Server", "disconnected");
+                };
+
+                // And of course, the main event!
+                ws.onmessage = function (evt) {
+                    addMessage("Echo", evt.data);
+                };
+
+            });
+
+            // Handle the form submission
+            $("form#input").on("submit", function (event) {
+                // If the socket's not open, we're done here
+                if (ws.readyState === WebSocket.OPEN) {
+                    // Send the message, then clear and focus
+                    ws.send($("#message").val());
+                    $("#message").val('').focus();
+                }
+                else {
+                    addMessage("Server", "Connection is closed");
+                }
+
+                event.preventDefault();
+            });
+        });
+    </script>
+}
