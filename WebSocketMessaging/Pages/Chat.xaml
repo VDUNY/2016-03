@@ -1,0 +1,31 @@
+﻿<PageFunction x:Class="WebSocketMessaging.Chat" x:TypeArguments="local:ServerInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="clr-namespace:WebSocketMessaging"
+      Title="Chat">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <FlowDocumentScrollViewer Grid.Row="0" Margin="3 3 3 0" x:Name="OutputViewer" >
+            <FlowDocument FontFamily="Consolas" FontSize="7pt">
+                <!--
+                <Paragraph TextIndent="-50" Margin="50 0 0 0">
+                    <Run FontWeight="ExtraBold">10:00 Jaykul</Run>
+                    <Run>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</Run>
+                </Paragraph>
+                -->
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        <Grid Grid.Row="1" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="Message"/>
+            <Button IsDefault="True" Grid.Column="1" Content="Send" Click="Send_Click" Margin="3 0 0 0" />
+        </Grid>
+    </Grid>
+</PageFunction>
