@@ -1,0 +1,6 @@
+﻿<NavigationWindow x:Class="WebSocketMessaging.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Source="Login.xaml" ShowsNavigationUI="False"
+        Title="WebSocket Messaging" Height="308.666" Width="565">
+</NavigationWindow>
