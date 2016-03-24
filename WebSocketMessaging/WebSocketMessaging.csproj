@@ -65,10 +65,6 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\ScrollViewerHelper.cs" />
     <Compile Include="ViewModels\ServerInfo.cs" />
-    <Page Include="Styles\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
